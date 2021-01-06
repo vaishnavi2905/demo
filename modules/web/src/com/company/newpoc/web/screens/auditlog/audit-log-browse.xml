@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://auditLogBrowse.caption"
+        focusComponent="auditLogsTable"
+        messagesPack="com.company.newpoc.web.screens.auditlog">
+    <data readOnly="true">
+        <collection id="auditLogsDc"
+                    class="com.company.newpoc.entity.AuditLog">
+            <view extends="_local"/>
+            <loader id="auditLogsDl">
+                <query>
+                    <![CDATA[select e from newpoc_AuditLog e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="auditLogsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="auditLogsTable"
+                dataLoader="auditLogsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="auditLogsTable"
+                    width="100%"
+                    dataContainer="auditLogsDc">
+            <actions>
+            </actions>
+            <columns>
+                <column id="description"/>
+                <column id="date"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
